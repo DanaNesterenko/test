@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивный макет</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #000;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .col {
+            height: 150px;
+        }
+        
+        /* Цвета блоков */
+        .cl-1 { background-color: #cd5c5c; }
+        .cl-2 { background-color: #dc143c; }
+        .cl-3 { background-color: #8b0000; }
+        .cl-4 { background-color: #ffc0cb; }
+        .cl-5 { background-color: #ff69b4; }
+        .cl-6 { background-color: #c71585; }
+        .cl-7 { background-color: #32cd32; }
+        .cl-8 { background-color: #00fa9a; }
+        .cl-9 { background-color: #2e8b57; }
+        .cl-10 { background-color: #006400; }
+        .cl-11 { background-color: #9acd32; }
+        .cl-12 { background-color: #808000; }
+        .cl-13 { background-color: #adff2f; }
+        .cl-14 { background-color: #00ff00; }
+        .cl-15 { background-color: #ffa07a; }
+        .cl-16 { background-color: #ff4500; }
+        .cl-17 { background-color: #ffa500; }
+        .cl-18 { background-color: #bc8f8f; }
+        .cl-19 { background-color: #f4a460; }
+        .cl-20 { background-color: #8b4513; }
+        .cl-21 { background-color: #d2691e; }
+        .cl-22 { background-color: #a52a2a; }
+        .cl-23 { background-color: #800000; }
+        
+        /* Мобильная версия (по умолчанию) */
+        .col-1 { flex: 0 0 8.33333%; }
+        .col-2 { flex: 0 0 16.66666%; }
+        .col-3 { flex: 0 0 25%; }
+        .col-4 { flex: 0 0 33.33333%; }
+        .col-5 { flex: 0 0 41.66666%; }
+        .col-6 { flex: 0 0 50%; }
+        .col-7 { flex: 0 0 58.33333%; }
+        .col-8 { flex: 0 0 66.66666%; }
+        .col-9 { flex: 0 0 75%; }
+        .col-10 { flex: 0 0 83.33333%; }
+        .col-11 { flex: 0 0 91.66666%; }
+        .col-12 { flex: 0 0 100%; }
+        
+        .d-none { display: none; }
+        .d-block { display: block; }
+        
+        /* Планшетная версия */
+        @media (min-width: 768px) {
+            .col-md-1 { flex: 0 0 8.33333%; }
+            .col-md-2 { flex: 0 0 16.66666%; }
+            .col-md-3 { flex: 0 0 25%; }
+            .col-md-4 { flex: 0 0 33.33333%; }
+            .col-md-5 { flex: 0 0 41.66666%; }
+            .col-md-6 { flex: 0 0 50%; }
+            .col-md-7 { flex: 0 0 58.33333%; }
+            .col-md-8 { flex: 0 0 66.66666%; }
+            .col-md-9 { flex: 0 0 75%; }
+            .col-md-10 { flex: 0 0 83.33333%; }
+            .col-md-11 { flex: 0 0 91.66666%; }
+            .col-md-12 { flex: 0 0 100%; }
+            
+            .d-md-none { display: none; }
+            .d-md-block { display: block; }
+        }
+        
+        /* Десктопная версия */
+        @media (min-width: 1200px) {
+            .col-lg-1 { flex: 0 0 8.33333%; }
+            .col-lg-2 { flex: 0 0 16.66666%; }
+            .col-lg-3 { flex: 0 0 25%; }
+            .col-lg-4 { flex: 0 0 33.33333%; }
+            .col-lg-5 { flex: 0 0 41.66666%; }
+            .col-lg-6 { flex: 0 0 50%; }
+            .col-lg-7 { flex: 0 0 58.33333%; }
+            .col-lg-8 { flex: 0 0 66.66666%; }
+            .col-lg-9 { flex: 0 0 75%; }
+            .col-lg-10 { flex: 0 0 83.33333%; }
+            .col-lg-11 { flex: 0 0 91.66666%; }
+            .col-lg-12 { flex: 0 0 100%; }
+            
+            .d-lg-none { display: none; }
+            .d-lg-block { display: block; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!--- Ряд 1 -->
+        <div class="row">
+            <div class="col col-6 col-md-4 col-lg-3 cl-1"></div>
+            <div class="col d-none d-md-block col-md-4 col-lg-6 cl-2"></div>
+            <div class="col col-6 col-md-4 col-lg-3 cl-3"></div>
+        </div>
+        
+        <!-- Ряд 2 -->
+        <div class="row">
+            <div class="col col-12 col-md-6 col-lg-8 cl-4"></div>
+            <div class="col d-none d-md-block col-md-6 col-lg-4 cl-6"></div>
+        </div>
+        
+        <!-- Ряд 3 -->
+        <div class="row">
+            <div class="col col-12 col-md-6 col-lg-8 cl-5"></div>
+            <div class="col d-none  d-md-block col-md-6 col-lg-4 cl-6"></div>
+        </div>
+        
+        <!-- Ряд 4 -->
+        <div class="row">
+            <div class="col col-12 d-md-none d-lg-none cl-6"></div>
+            <div class="col d-none d-md-block col-md-3 col-lg-2 cl-7"></div>
+             <div class="col d-none  d-md-block col-md-6 col-lg-7 cl-8"></div>
+             <div class="col d-none  d-md-block col-md-3 d-lg-none cl-14"></div>
+             <div class="col d-none d-md-none d-lg-block col-lg-3 cl-13"></div>
+
+        </div>
+        
+        <!-- Ряд 5 -->
+        <div class="row">
+            <div class="col col-12 d-md-none d-lg-none cl-6"></div>
+            <div class="col d-none d-md-block col-md-6 col-lg-7 cl-9"></div>
+            <div class="col d-none d-md-block col-md-3 col-lg-2 cl-10"></div>
+            <div class="col d-none d-md-block col-md-3 col-lg-3 cl-14"></div>
+        </div>
+        
+        <!-- Ряд 6 -->
+        <div class="row">
+            <div class="col col-6 d-md-none d-lg-none cl-7"></div>
+            <div class="col col-6 d-md-none d-lg-none cl-8"></div>
+             <div class="col d-none d-md-block col-md-3 col-lg-2 cl-11"></div>
+             <div class="col d-none d-md-block col-md-6 col-lg-7 cl-12"></div>
+             <div class="col d-none d-md-block col-md-3 col-lg-3 cl-14"></div>
+        </div>
+        
+        <!-- Ряд 7 -->
+        <div class="row">
+           <div class="col col-6 d-md-none d-lg-none cl-9"></div>
+            <div class="col col-6 d-md-none d-lg-none cl-10"></div>
+            <div class="col d-none  d-lg-block col-lg-1"></div>
+            <div class="col d-none d-md-block col-md-4 d-lg-block col-lg-1 cl-15"></div>
+            <div class="col d-none d-md-block col-md-0 d-lg-block col-lg-1 cl-15"></div>
+            <div class="col d-none  d-lg-block col-lg-1"></div>
+            <div class="col d-none  d-lg-block col-lg-1"></div>
+            <div class="col d-none d-md-block col-md-4 d-lg-block col-lg-1 cl-16"></div>
+            <div class="col d-none d-md-block col-md-0 d-lg-block col-lg-1 cl-16"></div>
+            <div class="col d-none  d-lg-block col-lg-1"></div>
+            <div class="col d-none  d-lg-block col-lg-1"></div>
+            <div class="col d-none d-md-block col-md-4 d-lg-block col-lg-1 cl-17"></div>
+            <div class="col d-none d-md-block col-md-0 d-lg-block col-lg-1 cl-17"></div>
+            <div class="col d-none  d-lg-block col-lg-1"></div>
+        </div>
+        
+        <!-- Ряд 8 -->
+        <div class="row">
+            <div class="col col-6 d-md-none d-lg-none cl-11"></div>
+            <div class="col col-6 d-md-none d-lg-none cl-12"></div>
+            <div class="col d-none d-md-block col-md-3 col-lg-3 cl-18"></div>
+             <div class="col d-none d-md-block col-md-3 col-lg-3 cl-21"></div>
+            <div class="col d-none d-md-none d-lg-block col-lg-6 cl-20"></div>
+            <div class="col d-none d-md-block col-md-6 d-lg-none cl-19"></div>
+      
+           
+        
+            
+
+        </div>
+        
+        <!-- Ряд 9 -->
+        <div class="row">
+            <div class="col col-12 d-md-none d-lg-none cl-14"></div>
+            <div class="col d-none d-md-block  col-md-6 d-lg-none cl-20"></div>
+            <div class="col d-none d-md-none d-lg-block col-lg-3 cl-19"></div>
+            <div class="col d-none d-md-none  d-lg-block col-lg-3 cl-21"></div>
+            <div class="col d-none d-md-block col-md-3 col-lg-3 cl-22"></div>
+            <div class="col d-none d-md-block col-md-3 col-lg-3 cl-23"></div>
+            
+        
+            
+        </div>
+        
+        <!-- Ряд 10 -->
+        <div class="row">
+            <div class="col col-6  d-md-none d-lg-none cl-16"></div>
+            <div class="col col-6  d-md-none d-lg-none cl-17"></div>
+        </div>
+        
+        <!-- Ряд 11 -->
+        <div class="row">
+            <div class="col col-6  d-md-none d-lg-none cl-18"></div>
+            <div class="col col-6  d-md-none d-lg-none cl-19"></div>
+        </div>
+        
+        <!-- Ряд 12 -->
+        <div class="row">
+             <div class="col col-12 d-md-none d-lg-none cl-20"></div>
+        </div>
+        <!-- Ряд 13 -->
+        <div class="row">
+             <div class="col col-12 d-md-none d-lg-none cl-20"></div>
+        </div>
+
+          <!-- Ряд 14 -->
+        <div class="row">
+             <div class="col col-12 d-md-none d-lg-none cl-21"></div>
+        </div>
+        <!-- Ряд 15 -->
+        <div class="row">
+             <div class="col col-12 d-md-none d-lg-none cl-21"></div>
+        </div>
+
+        <!-- Ряд 11 -->
+        <div class="row">
+            <div class="col col-6  d-md-none d-lg-none cl-22"></div>
+            <div class="col col-6  d-md-none d-lg-none cl-23"></div>
+        </div>
+    </div>
+</body>
+</html>
