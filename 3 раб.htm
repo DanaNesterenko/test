@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация авто для продажи</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            padding: 0 10px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+
+        .col {
+            flex: 1;
+            padding: 0 10px;
+            min-width: 200px;
+        }
+
+    
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .row {
+                flex-direction: column;
+            }
+            
+            .col {
+                padding: 0;
+            }
+            
+            label {
+                display: none;
+            }
+            
+            input::placeholder, textarea::placeholder {
+                color: #2c3e50;
+                font-weight: 600;
+            }
+            
+            fieldset {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Регистрация автомобиля для продажи</h1>
+        
+        <form action="#" method="post">
+            <fieldset>
+                <legend>Основная информация</legend>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="brand">Марка автомобиля</label>
+                            <input type="text" id="brand" name="brand" placeholder="Марка автомобиля" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="model">Модель</label>
+                            <input type="text" id="model" name="model" placeholder="Модель" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="year">Год выпуска</label>
+                            <input type="number" id="year" name="year" min="1990" max="2023" placeholder="Год выпуска" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="price">Цена (руб.)</label>
+                            <input type="number" id="price" name="price" min="0" placeholder="Цена (руб.)" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="vin">VIN-код</label>
+                    <input type="text" id="vin" name="vin" placeholder="VIN-код" pattern="[A-HJ-NPR-Z0-9]{17}" title="17-значный VIN-код">
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Технические характеристики</legend>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="engine">Двигатель</label>
+                            <select id="engine" name="engine" required>
+                                <option value="" disabled selected>Выберите тип двигателя</option>
+                                <option value="petrol">Бензиновый</option>
+                                <option value="diesel">Дизельный</option>
+                                <option value="hybrid">Гибридный</option>
+                                <option value="electric">Электрический</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="volume">Объем двигателя (л)</label>
+                            <input type="number" id="volume" name="volume" min="0.5" max="10" step="0.1" placeholder="Объем двигателя (л)">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="transmission">Коробка передач</label>
+                            <select id="transmission" name="transmission" required>
+                                <option value="" disabled selected>Выберите коробку передач</option>
+                                <option value="manual">Механическая</option>
+                                <option value="automatic">Автоматическая</option>
+                                <option value="robot">Роботизированная</option>
+                                <option value="variator">Вариатор</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="mileage">Пробег (км)</label>
+                            <input type="number" id="mileage" name="mileage" min="0" placeholder="Пробег (км)" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="color">Цвет</label>
+                    <input type="color" id="color" name="color" value="#3498db">
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Дополнительная информация</legend>
+                
+                <div class="form-group">
+                    <label for="description">Описание автомобиля</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Описание автомобиля"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="photos">Фотографии автомобиля</label>
+                    <input type="file" id="photos" name="photos" multiple accept="image/*">
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="history" name="history">
+                    <label for="history">Автомобиль не был в ДТП</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="warranty" name="warranty">
+                    <label for="warranty">Наличие гарантии</label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">Контактный телефон</label>
+                    <input type="tel" id="contact" name="contact" placeholder="Контактный телефон" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Электронная почта</label>
+                    <input type="email" id="email" name="email" placeholder="Электронная почта" required>
+                </div>
+            </fieldset>
+            
+            <button type="submit">Зарегистрировать автомобиль</button>
+        </form>
+    </div>
+</body>
+</html>
