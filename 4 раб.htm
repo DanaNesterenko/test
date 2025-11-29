@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Яхта и Механические Часы</title>
+    <style>
+ 
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #87CEEB, #1E90FF);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        h2 {
+            text-align: center;
+            color: #1E3A8A;
+            margin-top: 0;
+        }
+        
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, #1E90FF, #4682B4);
+        }
+        
+        .sea {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, #000080, #1E90FF);
+        }
+        
+        .wave {
+            position: absolute;
+            bottom: 100px;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.3));
+            border-radius: 50%;
+            animation: waves 3s infinite ease-in-out;
+        }
+        
+        .wave:nth-child(2) {
+            bottom: 95px;
+            animation-delay: 0.5s;
+        }
+        
+        .wave:nth-child(3) {
+            bottom: 90px;
+            animation-delay: 1s;
+        }
+        
+        .yacht {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 80px;
+            animation: sailing 8s infinite ease-in-out;
+        }
+        
+        .hull {
+            position: absolute;
+            bottom: 0;
+            width: 180px;
+            height: 30px;
+            background-color: #8B4513;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .deck {
+            position: absolute;
+            bottom: 30px;
+            width: 150px;
+            height: 15px;
+            background-color: #DEB887;
+            left: 15px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .mast {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            width: 5px;
+            height: 120px;
+            background-color: #654321;
+            transform: translateX(-50%);
+        }
+        
+        .sail {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 100px solid white;
+            transform: translateX(-50%);
+            animation: sail-flap 4s infinite ease-in-out;
+        }
+        
+        .flag {
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            width: 30px;
+            height: 20px;
+            background-color: red;
+            transform: translateX(-50%);
+            animation: flag-wave 2s infinite ease-in-out;
+        }
+        
+        .sun {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 40px #FFA500;
+            animation: sun-glow 5s infinite alternate;
+        }
+        
+
+        .clock-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+        
+        .clock {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 10px solid #333;
+            border-radius: 50%;
+            background-color: #f8f8f8;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .clock-face {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background-color: #333;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .hour-hand {
+            width: 6px;
+            height: 50px;
+            background-color: #333;
+            transform: translateX(-50%) rotate(0deg);
+            animation: rotation 43200s infinite linear;
+        }
+        
+        .minute-hand {
+            width: 4px;
+            height: 70px;
+            background-color: #666;
+            transform: translateX(-50%) rotate(0deg);
+            animation: rotation 3600s infinite linear;
+        }
+        
+        .second-hand {
+            width: 2px;
+            height: 80px;
+            background-color: #e74c3c;
+            transform: translateX(-50%) rotate(0deg);
+            animation: rotation 60s infinite linear;
+        }
+        
+        .number {
+            position: absolute;
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .number-12 { top: 10px; left: calc(50% - 18px ); }
+        .number-3 { top: calc(50% - 9px); right: 10px; }
+        .number-6 { bottom: 10px; left: calc(50% - 10px); }
+        .number-9 { top: calc(50% - 9px); left: 10px; }
+        
+      
+        @keyframes sailing {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateX(-40%) translateY(-5px) rotate(2deg);
+            }
+            50% {
+                transform: translateX(-60%) translateY(-3px) rotate(-1deg);
+            }
+            75% {
+                transform: translateX(-45%) translateY(-7px) rotate(3deg);
+            }
+        }
+        
+        @keyframes sail-flap {
+            0%, 100% {
+                transform: translateX(-50%) skew(0deg, 0deg);
+            }
+            50% {
+                transform: translateX(-50%) skew(2deg, 1deg);
+            }
+        }
+        
+        @keyframes flag-wave {
+            0%, 100% {
+                transform: translateX(-50%) skew(0deg, 0deg);
+            }
+            50% {
+                transform: translateX(-50%) skew(5deg, 2deg);
+            }
+        }
+        
+        @keyframes waves {
+            0%, 100% {
+                transform: scaleY(1);
+            }
+            50% {
+                transform: scaleY(1.2);
+            }
+        }
+        
+        @keyframes sun-glow {
+            0% {
+                box-shadow: 0 0 40px #FFA500;
+            }
+            100% {
+                box-shadow: 0 0 60px #FF4500;
+            }
+        }
+        
+        @keyframes rotation {
+            from { transform: translateX(-50%) rotate(0deg); }
+            to { transform: translateX(-50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Анимированная яхта и механические часы</h1>
+        <div class="section">
+            <h2>Задание 1: Яхта</h2>
+            <div class="scene">
+                <div class="sea"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="yacht">
+                    <div class="hull"></div>
+                    <div class="deck"></div>
+                    <div class="mast"></div>
+                    <div class="sail"></div>
+                    <div class="flag"></div>
+                </div>
+                <div class="sun"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Задание 2: Механические часы</h2>
+            <div class="clock-container">
+                <div class="clock">
+                    <div class="clock-face"></div>
+                    <div class="number number-12">12</div>
+                    <div class="number number-3">3</div>
+                    <div class="number number-6">6</div>
+                    <div class="number number-9">9</div>
+                    
+                    <div class="hand hour-hand"></div>
+                    <div class="hand minute-hand"></div>
+                    <div class="hand second-hand"></div>
+                    <div class="center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
