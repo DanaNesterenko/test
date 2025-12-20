@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen LC-110N Калькулятор</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: white;
+            padding: 20px;
+        }
+        
+        .calculator {
+            background: linear-gradient(145deg, #e6f7ff, #d1ecff);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 123, 255, 0.15),
+                        0 5px 15px rgba(0, 123, 255, 0.1);
+            overflow: hidden;
+            width: 340px;
+            border: 1px solid #b3d9ff;
+        }
+        
+        .brand {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #3399ff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .display-container {
+            padding: 20px;
+            background: linear-gradient(to bottom, #f0f9ff, #e6f3ff);
+            border-bottom: 2px solid #cce7ff;
+        }
+        
+        .display {
+            background: linear-gradient(to bottom, #e1f5fe, #b3e5fc);
+            color: #0066cc;
+            padding: 20px;
+            text-align: right;
+            font-size: 36px;
+            font-weight: bold;
+            border-radius: 12px;
+            border: 2px inset #4fc3f7;
+            min-height: 85px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+        }
+        
+        .function-label {
+            color: #0066cc;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 8px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 2px;
+            background-color: #cce7ff;
+            padding: 2px;
+            border-top: 1px solid #b3d9ff;
+        }
+        
+        button {
+            border: none;
+            padding: 22px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            outline: none;
+            border-radius: 0;
+        }
+        
+        button:active {
+            transform: scale(0.95);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .number {
+            background: linear-gradient(to bottom, #ffffff, #e6f2ff);
+            color: #0066cc;
+            border: 1px solid #b3d9ff;
+        }
+        
+        .number:hover {
+            background: linear-gradient(to bottom, #f0f9ff, #d9ecff);
+        }
+        
+        .operation {
+            background: linear-gradient(to bottom, #3399ff, #0066cc);
+            color: white;
+            border: 1px solid #0052a3;
+        }
+        
+        .operation:hover {
+            background: linear-gradient(to bottom, #4da6ff, #0073e6);
+        }
+        
+        .function {
+            background: linear-gradient(to bottom, #66b3ff, #3399ff);
+            color: white;
+            border: 1px solid #0073e6;
+        }
+        
+        .function:hover {
+            background: linear-gradient(to bottom, #80c1ff, #4da6ff);
+        }
+        
+        .memory {
+            background: linear-gradient(to bottom, #99ccff, #66b3ff);
+            color: white;
+            border: 1px solid #3399ff;
+        }
+        
+        .memory:hover {
+            background: linear-gradient(to bottom, #b3d9ff, #80c1ff);
+        }
+        
+        .equals {
+            background: linear-gradient(to bottom, #ff9900, #cc7a00);
+            color: white;
+            border: 1px solid #b36b00;
+        }
+        
+        .equals:hover {
+            background: linear-gradient(to bottom, #ffad33, #e68a00);
+        }
+        
+        .footer {
+            padding: 12px;
+            text-align: center;
+            color: #3399ff;
+            font-size: 12px;
+            background: linear-gradient(to bottom, #e6f7ff, #d1ecff);
+            border-top: 1px solid #b3d9ff;
+            font-weight: 600;
+        }
+        
+        .power-off {
+            color: #ff4444;
+            font-size: 10px;
+            margin-top: 5px;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Эффект нажатия */
+        button:active {
+            transform: translateY(2px);
+        }
+        
+        /* Градиентные границы между кнопками */
+        .buttons {
+            background: linear-gradient(135deg, #cce7ff, #b3d9ff);
+        }
+        
+        /* Акцент на выделенных кнопках */
+        .operation, .equals {
+            box-shadow: 0 3px 5px rgba(0, 102, 204, 0.3);
+        }
+        
+        .function {
+            box-shadow: 0 2px 4px rgba(51, 153, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="brand">
+            CITIZEN LC-110N
+        </div>
+        
+        <div class="display-container">
+            <div class="display" id="display">0</div>
+            <div class="function-label" id="functionLabel">AUTO POWER OFF</div>
+        </div>
+        
+        <div class="buttons">
+            <!-- Первый ряд -->
+            <button class="function" onclick="clearAll()">C</button>
+            <button class="function" onclick="clearEntry()">CE</button>
+            <button class="function" onclick="backspace()">←</button>
+            <button class="operation" onclick="setOperation('÷')">÷</button>
+            
+            <!-- Второй ряд -->
+            <button class="memory" onclick="memoryClear()">MC</button>
+            <button class="memory" onclick="memoryRecall()">MR</button>
+            <button class="memory" onclick="memoryMinus()">M-</button>
+            <button class="operation" onclick="setOperation('×')">×</button>
+            
+            <!-- Третий ряд -->
+            <button class="number" onclick="addNumber('7')">7</button>
+            <button class="number" onclick="addNumber('8')">8</button>
+            <button class="number" onclick="addNumber('9')">9</button>
+            <button class="operation" onclick="setOperation('-')">-</button>
+            
+            <!-- Четвертый ряд -->
+            <button class="number" onclick="addNumber('4')">4</button>
+            <button class="number" onclick="addNumber('5')">5</button>
+            <button class="number" onclick="addNumber('6')">6</button>
+            <button class="operation" onclick="setOperation('+')">+</button>
+            
+            <!-- Пятый ряд -->
+            <button class="number" onclick="addNumber('1')">1</button>
+            <button class="number" onclick="addNumber('2')">2</button>
+            <button class="number" onclick="addNumber('3')">3</button>
+            <button class="operation" onclick="calculateSquareRoot()">√</button>
+            
+            <!-- Шестой ряд -->
+            <button class="number" onclick="toggleSign()">±</button>
+            <button class="number" onclick="addNumber('0')">0</button>
+            <button class="number" onclick="addDecimal()">.</button>
+            <button class="operation" onclick="calculatePercent()">%</button>
+            
+            <!-- Седьмой ряд -->
+            <button class="function" onclick="calculateInverse()">1/x</button>
+            <button class="memory" onclick="memoryAdd()">M+</button>
+            <button class="equals" onclick="calculate()" style="grid-column: span 2;">=</button>
+        </div>
+        
+        <div class="footer">
+            <div class="power-off">AUTO POWER OFF</div>
+        </div>
+    </div>
+
+    <script>
+        let displayValue = '0';
+        let firstOperand = null;
+        let operator = null;
+        let waitingForSecondOperand = false;
+        let memory = 0;
+        let lastResult = null;
+
+        const display = document.getElementById('display');
+        const functionLabel = document.getElementById('functionLabel');
+
+        function updateDisplay() {
+            display.textContent = displayValue;
+        }
+
+        function addNumber(number) {
+            if (waitingForSecondOperand) {
+                displayValue = number;
+                waitingForSecondOperand = false;
+            } else {
+                displayValue = displayValue === '0' ? number : displayValue + number;
+            }
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        function addDecimal() {
+            if (waitingForSecondOperand) {
+                displayValue = '0.';
+                waitingForSecondOperand = false;
+            } else if (!displayValue.includes('.')) {
+                displayValue += '.';
+            }
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        function toggleSign() {
+            if (displayValue !== '0') {
+                if (displayValue.charAt(0) === '-') {
+                    displayValue = displayValue.substring(1);
+                } else {
+                    displayValue = '-' + displayValue;
+                }
+                updateDisplay();
+            }
+            resetFunctionLabel();
+        }
+
+        function clearAll() {
+            displayValue = '0';
+            firstOperand = null;
+            operator = null;
+            waitingForSecondOperand = false;
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        function clearEntry() {
+            displayValue = '0';
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        function backspace() {
+            if (displayValue.length > 1) {
+                displayValue = displayValue.slice(0, -1);
+            } else {
+                displayValue = '0';
+            }
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        function setOperation(nextOperator) {
+            const inputValue = parseFloat(displayValue);
+            
+            if (operator && waitingForSecondOperand) {
+                operator = nextOperator;
+                resetFunctionLabel();
+                return;
+            }
+            
+            if (firstOperand === null) {
+                firstOperand = inputValue;
+            } else if (operator) {
+                const result = performCalculation();
+                displayValue = `${parseFloat(result.toFixed(10))}`;
+                firstOperand = parseFloat(result);
+            }
+            
+            waitingForSecondOperand = true;
+            operator = nextOperator;
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        function performCalculation() {
+            const inputValue = parseFloat(displayValue);
+            
+            if (operator === '+') return firstOperand + inputValue;
+            if (operator === '-') return firstOperand - inputValue;
+            if (operator === '×') return firstOperand * inputValue;
+            if (operator === '÷') {
+                if (inputValue === 0) {
+                    showError('Деление на ноль!');
+                    return firstOperand;
+                }
+                return firstOperand / inputValue;
+            }
+            
+            return inputValue;
+        }
+
+        function calculate() {
+            if (operator && !waitingForSecondOperand) {
+                const result = performCalculation();
+                displayValue = `${parseFloat(result.toFixed(10))}`;
+                lastResult = result;
+                firstOperand = null;
+                operator = null;
+                waitingForSecondOperand = false;
+                updateDisplay();
+                resetFunctionLabel();
+            }
+        }
+
+        function calculateSquareRoot() {
+            const value = parseFloat(displayValue);
+            if (value < 0) {
+                showError('Ошибка: √ отрицательного числа!');
+                return;
+            }
+            displayValue = `${Math.sqrt(value)}`;
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        function calculatePercent() {
+            const value = parseFloat(displayValue);
+            if (firstOperand !== null && operator) {
+                let result;
+                if (operator === '+' || operator === '-') {
+                    result = firstOperand * (value / 100);
+                } else {
+                    result = value / 100;
+                }
+                displayValue = `${result}`;
+            } else {
+                displayValue = `${value / 100}`;
+            }
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        function calculateInverse() {
+            const value = parseFloat(displayValue);
+            if (value === 0) {
+                showError('Деление на ноль!');
+                return;
+            }
+            displayValue = `${1 / value}`;
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        // Функции памяти
+        function memoryClear() {
+            memory = 0;
+            functionLabel.textContent = 'MEMORY CLEARED';
+            setTimeout(resetFunctionLabel, 1000);
+        }
+
+        function memoryRecall() {
+            displayValue = `${memory}`;
+            updateDisplay();
+            resetFunctionLabel();
+        }
+
+        function memoryAdd() {
+            memory += parseFloat(displayValue);
+            functionLabel.textContent = 'M+ ADDED';
+            setTimeout(resetFunctionLabel, 1000);
+        }
+
+        function memoryMinus() {
+            memory -= parseFloat(displayValue);
+            functionLabel.textContent = 'M- SUBTRACTED';
+            setTimeout(resetFunctionLabel, 1000);
+        }
+
+        function showError(message) {
+            functionLabel.textContent = message;
+            setTimeout(() => {
+                displayValue = '0';
+                updateDisplay();
+                resetFunctionLabel();
+            }, 2000);
+        }
+
+        function resetFunctionLabel() {
+            functionLabel.textContent = 'AUTO POWER OFF';
+        }
+
+        // Обработка клавиатуры
+        document.addEventListener('keydown', (event) => {
+            const key = event.key;
+            
+            if (key >= '0' && key <= '9') {
+                addNumber(key);
+            } else if (key === '.') {
+                addDecimal();
+            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                let op = key;
+                if (key === '*') op = '×';
+                if (key === '/') op = '÷';
+                setOperation(op);
+            } else if (key === 'Enter' || key === '=') {
+                calculate();
+            } else if (key === 'Escape') {
+                clearAll();
+            } else if (key === 'Backspace') {
+                backspace();
+            } else if (key === '%') {
+                calculatePercent();
+            }
+        });
+
+        // Инициализация
+        updateDisplay();
+    </script>
+</body>
+</html>
